@@ -1,20 +1,22 @@
-# This is a sample Python script.
 
-# Press Mayús+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+#simple consulta de los datos del usuario, conectando a la api y devolviendo un objeto user.
+from credentials import CREDENTIALS
+import tweepy
 
+# Authenticate to Twitter
+auth = tweepy.OAuthHandler(CREDENTIALS['API_KEY'],
+    CREDENTIALS['API_SECRET'])
+auth.set_access_token(CREDENTIALS['ACCESS_KEY'],
+    CREDENTIALS['ACCESS_SECRET'])
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+api = tweepy.API(auth)
 
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-#hola roque, eres mi mundo
-
-#lectura archivos
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+try:
+    user = api.verify_credentials()
+    if user:
+        print("The user is " + str(user.location) + ".")
+        print("Authentication OK")
+    else:
+        print("Error during authentication")
+except:
+    print("Exception in autentification ocurred")
