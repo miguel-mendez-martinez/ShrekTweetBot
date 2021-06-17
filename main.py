@@ -15,4 +15,6 @@ if __name__ == '__main__':
 
 #hola roque, eres mi mundo
 
+#lectura archivos
+
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
