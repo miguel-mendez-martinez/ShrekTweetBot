@@ -4,9 +4,20 @@ import tweepy
 
 
 def post_tweet(api):
-    status = api.update_status(constants.TWEET_ONE)
-    if status:
-        time.sleep(constants.HOUR)
+    now = datetime.now()
+
+    #formateado de los minutos
+    if now.minute < 10:
+        minute = '0' + str(now.minute)
+    else:
+        minute = str(now.minute)
+
+    #publicacion del tuit
+    status = api.update_status('El día '+ str(now.day) + '/' + str(now.month) + '/' + str(now.year)  + ' a las ' + str(now.hour) + ':' + minute + constants.TWEET_ONE)
+
+    #comprobacion de si se ha publicado correctamente
+    if(status):
+        time.sleep(180)
         return True
     else:
         return False
