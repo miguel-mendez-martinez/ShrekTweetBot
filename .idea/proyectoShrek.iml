@@ -4,7 +4,7 @@
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/entornoShrek" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.8 (BotShrek)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.8 (entornoShrekBien)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>

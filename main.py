@@ -15,10 +15,43 @@ api = tweepy.API(auth)
 
 #hola roque esto es para comprobar cosas
 
-try:
-    while True:
-        functionality.post_tweet(api)
-    #functionality.delete_portal(api)
-    #functionality.post_tweet(api)
-except Exception as e:
-    print("EXCEPTION-> " + e)
+print("Hola soy " + api.me().name + " un bot de twitter, me actualizo cada hora publicando un tweet pero tengo mas funciones que desea hacer:")
+
+#while True:
+#functionality.menciones_Bot(api)
+
+while True:
+    functionality.menciones_Bot(api)
+    print("""""
+       1.Consultar usuarios
+       2.Borrar feed
+       3.Publicar tweet
+       4.Exit/Quit
+       """"")
+    print("Tiempo restante para siguiente tweet automatico--> ")
+
+    selection = input("Please Select:")
+
+    selection = 1
+
+    if selection == '1':
+        print()
+    elif selection == '2':
+        print("Eliminando feed")
+        try:
+            functionality.delete_portal(api)
+        except Exception as e:
+            print(e)
+    elif selection == '3':
+        print("Publicacion de tweet")
+        try:
+            while True:
+                functionality.post_tweet(api)
+        except Exception as e:
+            print(e)
+    elif selection == '4':
+        break
+    else:
+        print("Unknown Option Selected!")
+
+
