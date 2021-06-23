@@ -17,9 +17,11 @@ api = tweepy.API(auth)
 
 print("Hola soy " + api.me().name + " un bot de twitter, me actualizo cada hora publicando un tweet pero tengo mas funciones que desea hacer:")
 
+#functionality.delete_portal(api)
+
 while True:
     try:
-        functionality.menciones_Bot(api)
+       functionality.menciones_Bot(api)
     except Exception as e:
         print(e)
 

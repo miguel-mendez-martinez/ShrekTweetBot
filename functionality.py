@@ -1,6 +1,6 @@
 import time
 import constants
-import datetime
+from _datetime import datetime
 import tweepy
 
 
@@ -17,7 +17,7 @@ def post_tweet(api):
     status = api.update_status('El día '+ str(now.day) + '/' + str(now.month) + '/' + str(now.year)  + ' a las ' + str(now.hour) + ':' + minute + constants.TWEET_ONE)
 
     #comprobacion de si se ha publicado correctamente
-    if(status):
+    if status:
         time.sleep(180)
         return True
     else:
@@ -44,12 +44,16 @@ def responde_tweet(api, mencion):
         minute = str(now.minute)
 
     # publicacion del tuit
-    status = api.update_status('@' + mencion.user.screen_name + 'yo tambien te quiero a dia' + str(now.day) + '/' + str(now.month) + '/' + str(now.year)  + ' a las ' + str(now.hour) + ':' + minute)
+    status = api.update_status('@' + mencion.user.screen_name + ' yo también te quiero a día ' + str(now.day) + '/' + str(now.month) + '/' + str(now.year)  + ' a las ' + str(now.hour) + ':' + minute, mencion.id, auto_populate_reply_metadata=True)
 
     # comprobacion de si se ha publicado correctamente
     if status:
+        print('He respondido al tuit')
         time.sleep(15)
         return True
+    else:
+        print('No he respondido al tuit de ' + mencion.user.screen_name)
+        return False
 
 
 
@@ -86,7 +90,7 @@ def menciones_Bot(api):
 
     #recorremos el nuevo set e imprimimos la nueva
     for mencion in diferencia:
-        print(mention.text)
+        print("@" + mention.user.screen_name + "te ha mencionado diciendo: " + mention.text +"\n")
         responde_tweet(api, mention)
 
     time.sleep(15)
