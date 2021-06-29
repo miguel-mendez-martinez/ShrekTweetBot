@@ -3,6 +3,7 @@
 from credentials import CREDENTIALS
 import tweepy
 import functionality
+import threading
 import constants
 
 # Authenticate to Twitter
@@ -13,17 +14,25 @@ auth.set_access_token(CREDENTIALS['ACCESS_KEY'],
 
 api = tweepy.API(auth)
 
-#hola roque esto es para comprobar cosas
-
 print("Hola soy " + api.me().name + " un bot de twitter, me actualizo cada hora publicando un tweet pero tengo mas funciones que desea hacer:")
 
-#functionality.delete_portal(api)
+#creamos los distintos hilos
 
-while True:
-    try:
-       functionality.menciones_Bot(api)
-    except Exception as e:
-        print(e)
+hiloMenciones = threading.Thread(target=functionality.menciones_Bot, args=(api,))
+hiloTweets = threading.Thread(target=functionality.post_tweet, args=(api,))
+
+hiloMenu = threading.Thread(target=functionality.menu, args=(api,))
+
+hiloMenciones.start()
+hiloTweets.start()
+hiloMenu.start()
+
+hiloMenciones.join()
+hiloTweets.join()
+hiloMenu.join()
+
+print("Todos los hilos han terminado con éxito")
+
 
 
 
